@@ -1,0 +1,16 @@
+{
+    "nodes": {
+        "dirk": {
+            "title": "Dirk Gently"
+        },
+        "richard": {
+            "title": "Richard"
+        }
+    },
+    "edges": [
+        {
+            "start": "dirk",
+            "end": "richard"
+        }
+    ]
+}
