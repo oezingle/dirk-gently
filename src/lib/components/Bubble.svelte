@@ -1,15 +1,21 @@
 <script lang="ts">
+	import type { Coordinate } from '../util/geometry';
+
 	export let size = 25;
 
 	export let color = '#ff0000';
 
-    /**
-     * Set CSS variables dynamically for one object. 
-     * Bind to an element using use:bindCSS={vars}
-     * 
-     * @param node a svelte element
-     * @param vars an object of variable name and value pairs
-     */
+	export let text = 'Testing testing 123';
+
+	export let coordinate: Coordinate = { x: 0, y: 0 };
+
+	/**
+	 * Set CSS variables dynamically for one object.
+	 * Bind to an element using use:bindCSS={vars}
+	 *
+	 * @param node a svelte element
+	 * @param vars an object of variable name and value pairs
+	 */
 	const bindCSS = (node: any, vars: Record<string, any>) => {
 		setCSS(node, vars);
 
@@ -20,24 +26,31 @@
 
 	const setCSS = (node: any, vars: Record<string, any>) => {
 		Object.entries(vars).forEach(([name, value]) => {
-            console.log(name, value)
-            node.style.setProperty(`--${name}`, value);
-        });
+			node.style.setProperty(`--${name}`, value);
+		});
 	};
 </script>
 
-<div class="bubble" use:bindCSS={{ size: `${size}px`, color }} />
+<div class="container" style="top: {coordinate.y}px; left: {coordinate.x}px;">
+	<p class="bubble" use:bindCSS={{ size: `${size}px`, color }} />
+	<p class="description">{text}</p>
+</div>
 
 <style>
-	.bubble {
+	.container {
+		position: absolute;
+	}
+
+	.container > .bubble {
 		border-radius: 100%;
 		border: 5px solid black;
 
-        background: var(--color);
+		background: var(--color);
 
-		height: var(--size);
-		width: var(--size);
+		padding: var(--size);
+	}
 
-		position: absolute;
+	.container > .description {
+		position: relative;
 	}
 </style>

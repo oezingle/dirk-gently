@@ -1,8 +1,9 @@
-
 <script>
-    import Interconnected from "../lib/components/Interconnected.svelte";
+	import Interconnected from '../lib/components/Interconnected.svelte';
 
-    import web from '../lib/web.json'
+	import web from '../lib/web.json';
 </script>
 
-<Interconnected web="{web}" />
+<div style="height: 100vh;">
+	<Interconnected {web} />
+</div>
