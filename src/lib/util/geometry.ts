@@ -86,7 +86,7 @@ const generateCoordinateExtremes = (coordinates: Coordinates) => {
  * @param coordinates 
  * @returns 
  */
-const getPolygonSize = (coordinates: Coordinates) => {
+export const getPolygonSize = (coordinates: Coordinates) => {
     const extremes = generateCoordinateExtremes(coordinates);
 
     return {

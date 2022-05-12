@@ -1,21 +1,33 @@
-<script lang="ts">
-	import { generateNGon, type Coordinate } from '$lib/util/geometry';
+<!-- 
+	TODO make everything but the hovered bubble transparent when hovering over a bubble.
+	TODO Maybe use a context?
+-->
 
-	import { auditWeb, type Web } from '../util/web';
+<script lang="ts">
+	import { generateNGon, type Coordinate } from '../util/geometry';
+	import { objectMap } from '../util/object';
+
+	import { auditWeb, type Web, type WebNode } from '../util/web';
 
 	import Bubble from './Bubble.svelte';
+	import Line from './Line.svelte';
 
 	export let web: Web;
 
 	$: web = auditWeb(web);
 
 	const screenCoordinate = (point: Coordinate) => {
+		// TODO center
+
 		if (!element) throw new Error('Element not yet mounted');
+
+		const divWidth = (element.clientWidth * 2) / 3;
+		const divHeight = (element.clientHeight * 2) / 3;
 
 		const pad = 10;
 
-		const canvasWidth = element.clientWidth - 2 * pad;
-		const canvasHeight = element.clientHeight - 2 * pad;
+		const canvasWidth = divWidth - 2 * pad;
+		const canvasHeight = divHeight - 2 * pad;
 
 		const { x, y } = point;
 
@@ -28,17 +40,37 @@
 	let element: Element;
 
 	let sides = Object.keys(web.nodes).length;
+
+	let coordinates = generateNGon(sides);
+
+	// Throw Ngon coordinates at object
+	$: web.nodes = objectMap(web.nodes, (_: string, node: WebNode, index: number) => {
+		return {
+			...node,
+			coordinate: coordinates[index]
+		};
+	});
+
+	const getNodeCoordinate = (name: string) => {
+		return screenCoordinate(web.nodes[name].coordinate);
+	};
 </script>
 
 <div class="is-max" bind:this={element}>
 	{#if element}
-		{#each generateNGon(sides) as coordinate}
-			<Bubble coordinate={screenCoordinate(coordinate)} />
+		{#each Object.values(web.nodes) as node}
+			<Bubble coordinate={screenCoordinate(node.coordinate)} text={node.title} color={web.categories[node.category].color} />
+		{/each}
+
+		{#each web.edges as edge}
+			<Line
+				start={getNodeCoordinate(edge.start)}
+				end={getNodeCoordinate(edge.end)}
+				text={edge.description}
+			/>
 		{/each}
 	{/if}
 </div>
-
-<!-- TODO screw this and switch to canvas -->
 
 <style>
 	.is-max {

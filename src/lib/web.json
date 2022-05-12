@@ -1,16 +1,119 @@
 {
     "nodes": {
         "dirk": {
-            "title": "Dirk Gently"
+            "title": "Dirk Gently",
+            "category": "character"
         },
         "richard": {
-            "title": "Richard"
+            "title": "Richard",
+            "category": "character"
+        },
+        "reg": {
+            "title": "Professor Regius Chronology",
+            "category": "character"
+        },
+        "susan": {
+            "title": "Susan Way",
+            "category": "character"
+        },
+        "gordon": {
+            "title": "Gordon Way",
+            "category": "character"
+        },
+        "monk": {
+            "title": "Electric Monk",
+            "category": "character"
+        },
+        "time_machine": {
+            "title": "Reg's Time Machine",
+            "category": "setting"
+        },
+        "phone": {
+            "title": "British Telecom"
+        },
+        "gordon_ghost": {
+            "title": "Gordon's Ghost",
+            "category": "character"
+        },
+        "alien": {
+            "title": "The alien's ghost",
+            "category": "character"
+        },
+        "music": {
+            "title": "Music"
+        },
+        "wayforward": {
+            "title": "WayForward Technologies"
         }
     },
     "edges": [
         {
             "start": "dirk",
-            "end": "richard"
+            "end": "richard",
+            "description": "Dirk and Richard met in College"
+        },
+        {
+            "start": "gordon",
+            "end": "richard",
+            "description": "Gordon is Richard's boss"
+        },
+        {
+            "start": "richard",
+            "end": "reg",
+            "description": "Richard and Reg know each other well from mentoring sessions in college."
+        },
+        {
+            "start": "richard",
+            "end": "susan",
+            "description": "Richard and Susan are dating"
+        },
+        {
+            "start": "gordon",
+            "end": "susan",
+            "description": "Gordon and Susan are brother and sister"
+        },
+        {
+            "start": "monk",
+            "end": "gordon",
+            "description": "The Electric Monk murders Gordon."
+        },
+        {
+            "start": "monk",
+            "end": "time_machine",
+            "description": "The Monk is accidentally sent through time and space"
+        },
+        {
+            "start": "reg",
+            "end": "time_machine",
+            "description": "Reg's apartment is a time machine"
+        },
+        {
+            "start": "gordon_ghost",
+            "end": "phone",
+            "description": "Gordon's ghost can only rest once he's phoned Sarah"
+        },
+        {
+            "start": "phone",
+            "end": "time_machine",
+            "description": "The time machine breaks when the phone in it gets fixed"
+        },
+        {
+            "start": "gordon",
+            "end": "gordon_ghost",
+            "description": "Gordon is shot"
+        },
+        {
+            "start": "gordon",
+            "end": "phone",
+            "description": "Gordon called everybody to talk out ideas"
         }
-    ]
+    ],
+    "categories": {
+        "character": {
+            "color": "#00ff00"
+        },
+        "setting": {
+            "color": "#0000ff"
+        }
+    }
 }

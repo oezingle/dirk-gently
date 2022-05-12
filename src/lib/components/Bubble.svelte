@@ -1,11 +1,11 @@
 <script lang="ts">
 	import type { Coordinate } from '../util/geometry';
 
-	export let size = 25;
+	export let size = 10;
 
 	export let color = '#ff0000';
 
-	export let text = 'Testing testing 123';
+	export let text = '';
 
 	export let coordinate: Coordinate = { x: 0, y: 0 };
 
@@ -43,14 +43,22 @@
 
 	.container > .bubble {
 		border-radius: 100%;
-		border: 5px solid black;
+		border: 2px solid black;
+
+        display: block;
+        width: 0;
+        height: 0;
 
 		background: var(--color);
 
 		padding: var(--size);
+
+        transform: translateY(-100%) translateX(-50%);
 	}
 
 	.container > .description {
 		position: relative;
+
+        transform: translateX(-50%) translateY(-150%);
 	}
 </style>

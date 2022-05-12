@@ -1,8 +1,14 @@
+import type { Coordinate } from "./geometry"
+import { objectMap } from "./object"
+
 export interface WebNode {
     title: string,
     description?: string,
     category?: string,
+    coordinate?: Coordinate,
 }
+
+export type AuditedWebNode = NonNullable<WebNode>
 
 export interface WebEdge {
     start: string,
@@ -21,7 +27,7 @@ export interface Web {
     categories: Record<string, WebCategory>
 }
 
-export const populateWebNode = (node: WebNode): WebNode => {
+export const populateWebNode = (node: WebNode): AuditedWebNode => {
     return {
         title: node.title,
         description: node.description ?? "",
@@ -47,7 +53,8 @@ export const populateWebCategory = (category: WebCategory): WebCategory => {
 export const auditWeb = (web: Web): Web => {
     if (!web.categories) web.categories = {}
 
-    const { nodes, edges, categories } = web;
+    const { edges } = web;
+    let { nodes, categories } = web;
 
     const isANode = (name: any) => name in nodes
 
@@ -57,30 +64,28 @@ export const auditWeb = (web: Web): Web => {
         categories['default'] = {}
     }
 
-    const objectMap = (object: any, fn: Function) => {
-        Object.keys(object).map((key) => {
-            object[key] = fn(key, object[key])
-        })
-    }
-
-    objectMap(nodes, (_: string, node: WebNode) => {
+    nodes = objectMap(nodes, (_: string, node: WebNode) => {
         node = populateWebNode(node)
 
-        if (!isACategory(node.category)) throw new Error("Referenced Category Doesn't Exist")
+        if (!isACategory(node.category)) throw new Error(`Referenced Category '${node.category}' Doesn't Exist`)
 
         return node
     });
-    objectMap(categories, (_: string, value: WebCategory) => populateWebCategory(value));
+    categories = objectMap(categories, (_: string, value: WebCategory) => populateWebCategory(value));
 
 
     return {
         nodes,
         categories,
         edges: edges.map((edge) => {
-            if (!isANode(edge.start)) throw new Error("Referenced Node Doesn't Exist")
-            if (!isANode(edge.end)) throw new Error("Referenced Node Doesn't Exist")
+            if (!isANode(edge.start)) throw new Error(`Referenced Node '${edge.start}' Doesn't Exist`)
+            if (!isANode(edge.end)) throw new Error(`Referenced Node '${edge.end}' Doesn't Exist`)
 
             return populateWebEdge(edge)
         }),
     }
+}
+
+export const getWebIndex = (web: Web, name: string): number => {
+    return Object.keys(web.nodes).indexOf(name)
 }
