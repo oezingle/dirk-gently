@@ -2,8 +2,9 @@
 	TODO make everything but the hovered bubble transparent when hovering over a bubble.
 	TODO Maybe use a context?
 -->
-
 <script lang="ts">
+	import { hoveredNode, nodeTransparency } from '$lib/util/stores';
+
 	import { generateNGon, type Coordinate } from '../util/geometry';
 	import { objectMap } from '../util/object';
 
@@ -21,19 +22,19 @@
 
 		if (!element) throw new Error('Element not yet mounted');
 
-		const divWidth = (element.clientWidth * 2) / 3;
-		const divHeight = (element.clientHeight * 2) / 3;
+		const divWidth = element.clientWidth;
+		const divHeight = element.clientHeight;
 
 		const pad = 10;
 
-		const canvasWidth = divWidth - 2 * pad;
-		const canvasHeight = divHeight - 2 * pad;
+		const canvasWidth = (divWidth * 2) / 3 - 2 * pad;
+		const canvasHeight = (divHeight * 2) / 3 - 2 * pad;
 
 		const { x, y } = point;
 
 		return {
-			x: (x + 0.5) * canvasWidth + pad,
-			y: (y + 0.5) * canvasHeight + pad
+			x: x * canvasWidth + pad + divWidth / 2,
+			y: y * canvasHeight + pad + divHeight / 2
 		};
 	};
 
@@ -54,12 +55,44 @@
 	const getNodeCoordinate = (name: string) => {
 		return screenCoordinate(web.nodes[name].coordinate);
 	};
+
+	const isAroundNode = (node: WebNode, mouse) => {
+		const coordinates = screenCoordinate(node.coordinate);
+
+		const BOX_SIZE = 20;
+
+		if (
+			coordinates.x - BOX_SIZE < mouse.x &&
+			coordinates.y - BOX_SIZE < mouse.y &&
+			coordinates.x + BOX_SIZE > mouse.x &&
+			coordinates.y + BOX_SIZE > mouse.y
+		) {
+			return true
+		}
+	};
+
+	const mouseMove = (event) => {
+		const notHovering = Object.entries(web.nodes).map(([key, node]) => {
+			const around = isAroundNode(node, event)
+
+			if (around) hoveredNode.set(key)
+
+			return around
+		}).filter(Boolean).length === 0;
+
+		if (notHovering) hoveredNode.set(undefined)
+	};
 </script>
 
-<div class="is-max" bind:this={element}>
+<div class="is-max" bind:this={element} on:mousemove={mouseMove}>
 	{#if element}
-		{#each Object.values(web.nodes) as node}
-			<Bubble coordinate={screenCoordinate(node.coordinate)} text={node.title} color={web.categories[node.category].color} />
+		{#each Object.entries(web.nodes) as [key, node]}
+			<Bubble
+				coordinate={screenCoordinate(node.coordinate)}
+				text={node.title}
+				color={web.categories[node.category].color}
+				node={key}
+			/>
 		{/each}
 
 		{#each web.edges as edge}
@@ -67,6 +100,7 @@
 				start={getNodeCoordinate(edge.start)}
 				end={getNodeCoordinate(edge.end)}
 				text={edge.description}
+				nodes={[edge.start, edge.end]}
 			/>
 		{/each}
 	{/if}

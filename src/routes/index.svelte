@@ -10,3 +10,9 @@
 <div style="height: 100vh;">
 	<Interconnected {web} />
 </div>
+
+<style>
+	div {
+		font-family: sans-serif;
+	}
+</style>

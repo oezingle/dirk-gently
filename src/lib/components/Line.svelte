@@ -1,10 +1,14 @@
 <script lang="ts">
+import { hoveredNode, nodeTransparency } from '$lib/util/stores';
+
 	import { getPolygonSize, type Coordinate } from '../util/geometry';
 
 	export let start: Coordinate;
 	export let end: Coordinate;
 
-    export let text = '';
+	export let nodes: Array<string>;
+
+	export let text = '';
 
 	const { width, height } = getPolygonSize([{ x: 0, y: 0 }, start, end]);
 
@@ -15,35 +19,37 @@
 		};
 	};
 
-    const center = getCenter(start, end);
-
-    console.log(center)
+	const center = getCenter(start, end);
 </script>
 
-<svg {height} {width}>
-	<line
-		x1={start.x}
-		y1={start.y}
-		x2={end.x}
-		y2={end.y}
-		style="stroke:rgb(0,0,0);stroke-width:2"
-	/>
-</svg>
+<div style="opacity: {nodeTransparency($hoveredNode,...nodes)}">
+	<svg {height} {width}>
+		<line
+			x1={start.x}
+			y1={start.y}
+			x2={end.x}
+			y2={end.y}
+			style="stroke:rgb(0,0,0);stroke-width:2"
+		/>
+	</svg>
 
-<p style="top: {center.y}px; left: {center.x}px">{text}</p>
+	<p style="top: {center.y}px; left: {center.x}px">{text}</p>
+</div>
 
 <style>
-    svg {
+	svg {
 		position: absolute;
 
 		top: 0;
 		left: 0;
 
-        z-index: -1;
+		z-index: -1;
 	}
 
-    p {
-        position: absolute;
-        transform: translateX(-50%);
-    }
+	p {
+		position: absolute;
+		transform: translateX(-50%);
+
+		z-index: -1;
+	}
 </style>
