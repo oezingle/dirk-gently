@@ -38,18 +38,6 @@
 			element.style.setProperty(`--${name}`, value);
 		});
 	};
-
-	/*const mouseHover = () => {
-		hoveredNode.set(node);
-
-		console.log('Hovered Node', node);
-	};
-
-	const mouseUnHover = () => {
-		hoveredNode.set(undefined);
-
-		console.log('Unhovered Node', node);
-	};*/
 </script>
 
 <div

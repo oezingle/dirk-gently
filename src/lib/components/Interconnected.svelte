@@ -3,19 +3,23 @@
 	TODO Maybe use a context?
 -->
 <script lang="ts">
-	import { hoveredNode, nodeTransparency } from '$lib/util/stores';
+	import { hoveredNode, webStore } from '$lib/util/stores';
+import { end_hydrating } from 'svelte/internal';
 
 	import { generateNGon, type Coordinate } from '../util/geometry';
 	import { objectMap } from '../util/object';
 
-	import { auditWeb, type Web, type WebNode } from '../util/web';
+	import { auditWeb, populateWebEdge, type Web, type WebNode } from '../util/web';
 
 	import Bubble from './Bubble.svelte';
+import ConnectionItem from './ConnectionItem.svelte';
 	import Line from './Line.svelte';
 
 	export let web: Web;
 
 	$: web = auditWeb(web);
+
+	$: webStore.set(web)
 
 	const screenCoordinate = (point: Coordinate) => {
 		// TODO center
@@ -99,16 +103,14 @@
 			<Line
 				start={getNodeCoordinate(edge.start)}
 				end={getNodeCoordinate(edge.end)}
-				text={edge.description}
 				nodes={[edge.start, edge.end]}
 			/>
 		{/each}
 	{/if}
 </div>
 
-<style>
-	.is-max {
-		min-height: 100%;
-		min-width: 100%;
-	}
-</style>
+<div id="right-list">
+	{#each web.edges as edge}
+		<ConnectionItem edge={edge} />
+	{/each}
+</div>

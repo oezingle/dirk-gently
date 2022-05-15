@@ -1,5 +1,5 @@
 <script lang="ts">
-import { hoveredNode, nodeTransparency } from '$lib/util/stores';
+	import { hoveredNode, nodeTransparency } from '$lib/util/stores';
 
 	import { getPolygonSize, type Coordinate } from '../util/geometry';
 
@@ -7,8 +7,6 @@ import { hoveredNode, nodeTransparency } from '$lib/util/stores';
 	export let end: Coordinate;
 
 	export let nodes: Array<string>;
-
-	export let text = '';
 
 	const { width, height } = getPolygonSize([{ x: 0, y: 0 }, start, end]);
 
@@ -22,7 +20,7 @@ import { hoveredNode, nodeTransparency } from '$lib/util/stores';
 	const center = getCenter(start, end);
 </script>
 
-<div style="opacity: {nodeTransparency($hoveredNode,...nodes)}">
+<div style="opacity: {nodeTransparency($hoveredNode, ...nodes, `${nodes[0]}-${nodes[1]}`)}">
 	<svg {height} {width}>
 		<line
 			x1={start.x}
@@ -32,8 +30,6 @@ import { hoveredNode, nodeTransparency } from '$lib/util/stores';
 			style="stroke:rgb(0,0,0);stroke-width:2"
 		/>
 	</svg>
-
-	<p style="top: {center.y}px; left: {center.x}px">{text}</p>
 </div>
 
 <style>
@@ -42,13 +38,6 @@ import { hoveredNode, nodeTransparency } from '$lib/util/stores';
 
 		top: 0;
 		left: 0;
-
-		z-index: -1;
-	}
-
-	p {
-		position: absolute;
-		transform: translateX(-50%);
 
 		z-index: -1;
 	}

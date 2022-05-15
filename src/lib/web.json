@@ -5,15 +5,21 @@
             "category": "character"
         },
         "richard": {
-            "title": "Richard",
+            "title": "Richard MacDuff",
+            "category": "character"
+        },
+        "wayforward": {
+            "title": "WayForward Technologies"
+        },
+        "music": {
+            "title": "Music"
+        },
+        "susan": {
+            "title": "Susan Way",
             "category": "character"
         },
         "reg": {
             "title": "Professor Regius Chronology",
-            "category": "character"
-        },
-        "susan": {
-            "title": "Susan Way",
             "category": "character"
         },
         "gordon": {
@@ -39,18 +45,19 @@
             "title": "The Alien's ghost",
             "category": "character"
         },
-        "music": {
-            "title": "Music"
+        "micheal": {
+            "title": "Michael Wenton-Weakes",
+            "category": "character"
         },
-        "wayforward": {
-            "title": "WayForward Technologies"
+        "fathom": {
+            "title": "Fathom Magazine"
         }
     },
     "edges": [
         {
             "start": "dirk",
             "end": "richard",
-            "description": "Dirk and Richard met in College"
+            "description": "Dirk and Richard met in College. Dirk helps Richard avoid the law when under suspicion"
         },
         {
             "start": "gordon",
@@ -111,6 +118,96 @@
             "start": "gordon",
             "end": "wayforward",
             "description": "Gordon is the CEO of WayForward Technologies"
+        },
+        {
+            "start": "richard",
+            "end": "wayforward",
+            "description": "Richard writes software for WayForward Technologies"
+        },
+        {
+            "start": "alien",
+            "end": "monk",
+            "description": "The Alien tried to take control of the electric monk"
+        },
+        {
+            "start": "alien",
+            "end": "richard",
+            "description": "The Alien tried to take control of Richard"
+        },
+        {
+            "start": "susan",
+            "end": "reg",
+            "description": "Susan was supposed to meet reg, but Richard forgets to pick her up"
+        },
+        {
+            "start": "reg",
+            "end": "time_machine",
+            "description": "Reg uses his time machine recreationally"
+        },
+        {
+            "start": "alien",
+            "end": "monk",
+            "description": "The alien suggested entering the door to Earth to the monk as an attempt to possess it"
+        },
+        {
+            "start": "alien",
+            "end": "time_machine",
+            "description": "The alien uses Reg's time machine to fix their mistake, before Dirk realizes the alien's true intentions"
+        },
+        {
+            "start": "alien",
+            "end": "richard",
+            "description": "The alien suggests stealing Susan's answering machine tape"
+        },
+        {
+            "start": "richard",
+            "end": "music",
+            "description": "Richard's software turns data into music"
+        },
+        {
+            "start": "susan",
+            "end": "music",
+            "description": "Susan is a professional cellist"
+        },
+        {
+            "start": "fathom",
+            "end": "micheal",
+            "description": "Micheal used to be the editor for Fathom magazine"
+        },
+        {
+            "start": "fathom",
+            "end": "richard",
+            "description": "Richard writes an article for Fathom after Micheal is fired"
+        },
+        {
+            "start": "micheal",
+            "end": "richard",
+            "description": "Richard and Micheal are coworkers, and have an uneasy relationship"
+        },
+        {
+            "start": "micheal",
+            "end": "alien",
+            "description": "The Alien possesses Micheal after he murders his replacement"
+        },
+        {
+            "start": "dirk",
+            "end": "alien",
+            "description": "Dirk realizes The Alien's plan to end humanity"
+        },
+        {
+            "start": "dirk",
+            "end": "susan",
+            "description": "Dirk interrupts Richard from comforting Susan about Gordon's death"
+        },
+        {
+            "start": "richard",
+            "end": "gordon_ghost",
+            "description": "Gordon's Ghost scares Richard while he drives from Cambridge to apologize to Susan"
+        },
+        {
+            "start": "susan",
+            "end": "micheal",
+            "description": "Susan has a bad night out with Micheal after deciding it was a better option than waiting for Richard"
         }
     ],
     "categories": {
