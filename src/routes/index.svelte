@@ -12,3 +12,7 @@
 <div style="height: 100vh;">
 	<Interconnected {web} />
 </div>
+
+<svelte:head>
+	<title>Dirk Gently's Holistic Detective Agency - Creative Project</title>
+</svelte:head>
