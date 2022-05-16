@@ -18,7 +18,7 @@
 
 <div class="box" on:focus={mouseHandler(`${edge.start}-${edge.end}`)} on:mouseover={mouseHandler(`${edge.start}-${edge.end}`)} >
     <b>{getNode(edge.start).title} & {getNode(edge.end).title}</b>
-	<p>{edge.description}</p>
+	<p style="white-space: pre-line">{edge.description}</p>
 </div>
 
 <style>

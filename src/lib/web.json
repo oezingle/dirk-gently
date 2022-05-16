@@ -77,12 +77,12 @@
         {
             "start": "gordon",
             "end": "susan",
-            "description": "Gordon and Susan are brother and sister"
+            "description": "Gordon and Susan are brother and sister."
         },
         {
             "start": "monk",
             "end": "gordon",
-            "description": "The Electric Monk murders Gordon."
+            "description": "The Electric Monk murders Gordon.\n\n\"Certainly the reaction of the person he had shot off at had seemed a little extreme.\" (128)"
         },
         {
             "start": "monk",
@@ -107,7 +107,7 @@
         {
             "start": "gordon",
             "end": "gordon_ghost",
-            "description": "Gordon is shot"
+            "description": "Gordon is shot by the Electric Monk"
         },
         {
             "start": "gordon",
@@ -142,7 +142,7 @@
         {
             "start": "reg",
             "end": "time_machine",
-            "description": "Reg uses his time machine recreationally"
+            "description": "Reg uses his time machine recreationally.\n\n\"You have a time machine and yo use it for ... watching television?\" (201)"
         },
         {
             "start": "alien",
@@ -182,7 +182,7 @@
         {
             "start": "micheal",
             "end": "richard",
-            "description": "Richard and Micheal are coworkers, and have an uneasy relationship"
+            "description": "Richard and Micheal are coworkers, and have an uneasy relationship.\n\n\"[Micheal was] known by some people as Micheal Wednesday-Week, because that was when he usually promised to have things done by.\" (91)"
         },
         {
             "start": "micheal",
@@ -202,7 +202,7 @@
         {
             "start": "richard",
             "end": "gordon_ghost",
-            "description": "Gordon's Ghost scares Richard while he drives from Cambridge to apologize to Susan"
+            "description": "Gordon's Ghost scares Richard while he drives from Cambridge to apologize to Susan\n\n\"I was just driving along and I suddenly imagined that I saw my employer throwing himself in front of my car.\" (79)"
         },
         {
             "start": "susan",
